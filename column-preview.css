@@ -1,0 +1,10 @@
+/* 관리 화면 오른쪽 미리보기용 스타일 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap");
+body { font-family: 'Noto Sans KR', sans-serif; background: #0d0b1e; color: rgba(255,255,255,0.85); line-height: 2; padding: 2rem; word-break: keep-all; }
+h1, h2, h3 { font-family: 'Noto Serif KR', serif; font-weight: 400; color: #fff; line-height: 1.5; }
+h2 { font-size: 1.45rem; margin-top: 2.5rem; }
+h3 { font-size: 1.2rem; color: #d4b8ff; margin-top: 2rem; }
+a { color: #d4b8ff; }
+strong { color: #fff; font-weight: 500; }
+img { max-width: 100%; border-radius: 12px; }
+blockquote { border-left: 3px solid #b388ff; margin-left: 0; padding: 0.5rem 0 0.5rem 1.25rem; background: rgba(179,136,255,0.06); }

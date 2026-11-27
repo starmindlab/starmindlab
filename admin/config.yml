@@ -1,0 +1,93 @@
+# 별마음 칼럼 관리 화면 설정 (Decap CMS)
+# GitHub 저장소: starmindlab/starmindlab
+backend:
+  name: github
+  repo: starmindlab/starmindlab
+  branch: main
+  commit_messages:
+    create: "칼럼 발행: {{slug}}"
+    update: "칼럼 수정: {{slug}}"
+    delete: "칼럼 삭제: {{slug}}"
+    uploadMedia: "이미지 업로드: {{path}}"
+    deleteMedia: "이미지 삭제: {{path}}"
+
+locale: ko
+site_url: https://starmindlab.co.kr
+display_url: https://starmindlab.co.kr
+logo_url: https://starmindlab.co.kr/logo-icon.png
+
+media_folder: images/columns
+public_folder: /images/columns
+
+collections:
+  - name: columns
+    label: 별마음 칼럼
+    label_singular: 칼럼
+    description: 여기서 쓴 글은 '발행'을 누르면 1~2분 뒤 홈페이지 칼럼에 자동으로 올라갑니다.
+    folder: content/columns
+    create: true
+    extension: md
+    slug: "{{year}}{{month}}{{day}}-{{hour}}{{minute}}"
+    summary: "{{title}}  ·  {{date}}"
+    sortable_fields: ["date", "title", "category"]
+    view_filters:
+      - label: 비공개 글
+        field: published
+        pattern: false
+    fields:
+      - label: 제목
+        name: title
+        widget: string
+      - label: 발행일
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - label: 카테고리
+        name: category
+        widget: select
+        default: 성인 ADHD
+        options:
+          - 성인 ADHD
+          - 여성 ADHD
+          - ADHD 코칭
+          - 심리상담
+          - 심리검사
+          - 뇌과학
+          - 코칭
+          - 센터 소식
+      - label: 대표 이미지 (선택)
+        name: thumbnail
+        widget: image
+        required: false
+        hint: 칼럼 목록과 카카오톡·네이버 공유 미리보기에 쓰입니다. 가로로 긴 사진이 잘 어울려요.
+      - label: 요약 (선택)
+        name: summary
+        widget: text
+        required: false
+        hint: 1~2문장. 네이버·구글 검색 결과와 칼럼 목록에 표시됩니다. 비워두면 본문 앞부분이 자동으로 쓰여요.
+      - label: 홈페이지에 공개
+        name: published
+        widget: boolean
+        default: true
+        hint: 끄면 저장은 되지만 홈페이지에는 보이지 않아요 (임시저장용).
+      - label: 본문
+        name: body
+        widget: markdown
+
+  - name: settings
+    label: 설정
+    files:
+      - name: blog_links
+        label: 네이버 블로그 추천글 (홈 칼럼 칸 빈자리 채우기용)
+        file: content/blog-links.json
+        description: 홈페이지 칼럼 칸은 최신 칼럼 5개를 보여주고, 칼럼이 5개보다 적으면 여기 적힌 블로그 글로 빈자리를 채웁니다.
+        fields:
+          - label: 블로그 글
+            name: links
+            widget: list
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: 카테고리 표시, name: category, widget: string, default: "ADHD" }
+              - { label: 블로그 주소, name: url, widget: string }
